@@ -1,8 +1,4 @@
 demonnic = demonnic or {}
-
---- demonnic.Stopwatch
---Creates a stopwatch 'object' to abstract some of the stopwatch functionality
---@module demonnic.Stopwatch
 demonnic.Stopwatch = {}
 
 --- Returns the stopwatch time
