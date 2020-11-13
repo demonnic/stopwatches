@@ -53,7 +53,13 @@ end
 
 --- Resets the stopwatch
 function demonnic.Stopwatch:reset()
-  return resetStopWatch(self.name)
+  resetStopWatch(self.name)
+  if self.startAt then
+    local startAtType = type(self.startAt)
+    assert(startAtType == "number", string.format("Bad constraint, (optional startAt as number expected, got %s!", startAtType))
+    self:adjust(self.startAt)
+  end
+  return true
 end
 
 --- Starts the stopwatch
@@ -128,9 +134,7 @@ function demonnic.Stopwatch:new(cons)
   assert(nameType == "string", string.format("Bad constraint, (optional name as string expected, got %s!", nameType))
   createStopWatch(me.name)
   if me.startAt then
-    local startAtType = type(me.startAt)
-    assert(startAtType == "number", string.format("Bad constraint, (optional startAt as number expected, got %s!", startAtType))
-    me:adjust(me.startAt)
+    me:reset()
   end
   if me.persistence then
     me:enablePersistence()
